@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default () => {
 	return (
@@ -6,14 +7,14 @@ export default () => {
 			<div className="navbar-brand">Githab-search</div>
 			<ul className="navbar-nav">
 				<li className="nav-item">
-					<a href="/" className="nav-link">
+					<NavLink exact to="/" className="nav-link">
 						Главная
-					</a>
+					</NavLink>
 				</li>
 				<li className="nav-item">
-					<a href="/about" className="nav-link">
+					<NavLink to="/about" className="nav-link">
 						Информация
-					</a>
+					</NavLink>
 				</li>
 			</ul>
 		</nav>
