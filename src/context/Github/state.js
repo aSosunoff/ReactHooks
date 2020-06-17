@@ -12,6 +12,7 @@ import {
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
+const withCreds = url => `${url}client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
 
 export const GithubState = ({ children }) => {
 	const initialState = {
@@ -26,9 +27,7 @@ export const GithubState = ({ children }) => {
 	const search = async (value) => {
 		setLoading();
 
-		const { data } = await axios.get(
-			`https://api.github.com/search/users?q=${value}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
-        );
+		const { data } = await axios.get(withCreds(`https://api.github.com/search/users?q=${value}&`));
         
 		dispatch({
 			type: SEARCH_USERS,
@@ -39,18 +38,22 @@ export const GithubState = ({ children }) => {
 	const getUser = async (name) => {
 		setLoading();
 
+		const { data } = await axios.get(withCreds(`https://api.github.com/users/${name}?`));
+
 		dispatch({
 			type: GET_USER,
-			payload: {},
+			payload: data,
 		});
 	};
 
 	const getRepos = async (name) => {
 		setLoading();
 
+		const { data } = await axios.get(withCreds(`https://api.github.com/users/${name}/repos?per_page=5&`));
+
 		dispatch({
 			type: GET_REPOS,
-			payload: [],
+			payload: data,
 		});
 	};
 
@@ -73,7 +76,6 @@ export const GithubState = ({ children }) => {
 				getUser,
 				getRepos,
 				clearUsers,
-				setLoading,
 				user,
 				users,
 				repos,
