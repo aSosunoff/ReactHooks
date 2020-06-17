@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { GithubContext } from "../context/Github/context";
 import { Link } from "react-router-dom";
+import Repos from "../components/Repos/";
 
 export default ({ match }) => {
 	const urlName = match.params.name;
@@ -85,9 +86,10 @@ export default ({ match }) => {
 							<div className="badge badge-secondary">Gists: {public_gists}</div>
 						</div>
 					</div>
-                    {JSON.stringify(repos)}
 				</div>
 			</div>
+
+			<Repos repos={repos} />
 		</>
 	);
 };
