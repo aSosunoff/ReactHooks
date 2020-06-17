@@ -4,7 +4,6 @@ import Card from "../components/Card";
 import { GithubContext } from "../context/Github/context";
 
 export default () => {
-	/* const cards = new Array(15).fill("").map((_, i) => i); */
 	const { loading, users } = useContext(GithubContext);
 
 	return (
